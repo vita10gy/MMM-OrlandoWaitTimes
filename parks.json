@@ -559,7 +559,7 @@
     ]
   },
   {
-    "id": "267615cc-8943-4c2a-ae2c-5da728ca591f",
+    "id": "UniversalIslandsOfAdventure",
     "name": "Universal's Islands of Adventure",
     "timezone": "America/New_York",
     "rides": [
@@ -573,7 +573,7 @@
       },
       {
         "name":"Jurassic World VelociCoaster",
-        "id": "267615cc-8943-4c2a-ae2c-5da728ca591f"
+        "id": "UniversalIslandsOfAdventure_18154"
       }
     ]
   }
