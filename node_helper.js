@@ -42,6 +42,7 @@ module.exports = NodeHelper.create({
         `https://api.themeparks.wiki/preview/parks/${selectedPark.id}/waittime`
       );
 
+      console.log(waitTimes,selectedPark);
       const results = [];
       for (const ride of selectedPark.rides) {
         const waitTime = waitTimes.data.find(
