@@ -23,6 +23,7 @@ module.exports = NodeHelper.create({
 
     const getPark = () => {
       const selectedPark = parks.find((p) => p.name === park.name);
+      console.log(selectedPark,parks);
       const selectedRides = park.rides.map((r) => {
         return {
           id: selectedPark.rides.find((r2) => r2.name === r)?.id || null,
