@@ -41,8 +41,7 @@ module.exports = NodeHelper.create({
       const waitTimes = await axios.get(
         `https://api.themeparks.wiki/preview/parks/${selectedPark.id}/waittime`
       );
-
-      console.log(waitTimes,selectedPark);
+      console.log(selectedPark);
       const results = [];
       for (const ride of selectedPark.rides) {
         const waitTime = waitTimes.data.find(
