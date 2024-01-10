@@ -570,6 +570,65 @@
       {
         "name":"Jurassic World VelociCoaster",
         "id": "UniversalIslandsOfAdventure_18154"
+      },
+      {
+        "name":"Hagrid's Magical Creatures Motorbike Adventure™",
+        "id": "UniversalIslandsOfAdventure_17097"
+      },
+      {
+        "name":"Jurassic World VelociCoaster",
+        "id": "UniversalIslandsOfAdventure_18154"
+      },
+      {
+        "name":"The Amazing Adventures of Spider-Man®",
+        "id": "UniversalIslandsOfAdventure_10831"
+      },
+      {
+        "name":"The Incredible Hulk Coaster®",
+        "id": "UniversalIslandsOfAdventure_10862"
+      },
+      {
+        "name":"Hogwarts™ Express - Hogsmeade™ Station",
+        "id": "UniversalIslandsOfAdventure_13225"
+      },
+      {
+        "name":"Skull Island: Reign of Kong™",
+        "id": "UniversalIslandsOfAdventure_13799"
+      },
+      {
+        "name":"Dudley Do-Right's Ripsaw Falls®",
+        "id": "UniversalIslandsOfAdventure_10837"
+      }
+    ]
+  },
+  {
+    "id": "UniversalStudiosFlorida",
+    "name": "Universal Studios Florida",
+    "timezone": "America/New_York",
+    "rides": [
+        {
+          "name": "E.T. Adventure™",
+          "id": "UniversalStudiosFlorida_10838"
+        },
+      {
+        "name":"Hollywood Rip Ride Rockit™",
+        "id": "UniversalStudiosFlorida_10841"
+      },
+      {
+        "name":"Revenge of the Mummy™",
+        "id": "UniversalStudiosFlorida_10858"
+      },
+      {
+        "name":"TRANSFORMERS™: The Ride-3D",
+        "id": "UniversalStudiosFlorida_10877"
+      },
+      {
+        "name":"Harry Potter and the Escape from Gringotts™",
+        "id": "UniversalStudiosFlorida_13221"
+      },
+      {
+        "name":"Hogwarts™ Express - King's Cross Station",
+        "id": "UniversalStudiosFlorida_13228"
       }
     ]
   }
