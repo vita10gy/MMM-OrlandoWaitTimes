@@ -44,12 +44,15 @@ module.exports = NodeHelper.create({
           showRide = selectedPark.rides.includes(ride.id);
         } else {
           showRide = ride.entityType === "ATTRACTION" && "queue" in ride;
+          if (showRide) {
+            console.log(`"${ride.id}", //${ride.name}`);
+          }
         }
         if (showRide) {
           const result = {
             name: ride.name,
             status: ride?.status || null,
-            waitTime: ride?.queue?.STANDBY?.waitTime || null,
+            waitTime: ride?.queue?.STANDBY?.waitTime ?? null,
           };
           //  console.log(result);
           results.push(result);
@@ -105,7 +108,6 @@ module.exports = NodeHelper.create({
     };
 
     const selectedPark = getPark();
-    console.info(selectedPark);
     if (!selectedPark) {
       sendError("Selected park not found");
       return;
