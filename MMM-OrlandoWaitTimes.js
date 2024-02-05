@@ -1,6 +1,6 @@
 Module.register("MMM-OrlandoWaitTimes", {
   defaults: {
-    updateInterval: 10 * 60 * 1000
+    updateInterval: 10 * 60 * 1000,
   },
 
   getScripts: function () {
@@ -70,10 +70,10 @@ Module.register("MMM-OrlandoWaitTimes", {
         timeCell.className = "bright title light time";
 
         if (ride.status == "Closed") {
-          timeCell.innerHTML = "closed";
-        } else if (ride.status == "Down") {
+          timeCell.innerHTML = "CLOSED";
+        } else if (ride.status == "DOWN") {
           timeCell.innerHTML = "down";
-        } else if (ride.status == "Refurbishment") {
+        } else if (ride.status == "REFURBISHMENT") {
           timeCell.innerHTML = "refurb";
         } else {
           timeCell.innerHTML = ride.waitTime;
@@ -87,17 +87,17 @@ Module.register("MMM-OrlandoWaitTimes", {
 
   socketNotificationReceived: function (notification, payload) {
     console.log("n: " + notification);
-    if (notification === "POPULATE_WAIT_TIMES_" + this.config.park.name) {
+    if (notification === "POPULATE_WAIT_TIMES_" + this.config.park.entity) {
       this.rides = payload.waitTimes;
       this.updateDom();
     } else if (
       notification ===
-      "POPULATE_OPENING_TIMES_" + this.config.park.name
+      "POPULATE_OPENING_TIMES_" + this.config.park.entity
     ) {
       this.openingTime = payload.openingTime;
       this.closingTime = payload.closingTime;
       this.updateDom();
-    } else if (notification === "ERROR_" + this.config.park.name) {
+    } else if (notification === "ERROR_" + this.config.park.entity) {
       this.errorMessage = payload.errorMessage;
       this.updateDom();
     }
@@ -105,5 +105,5 @@ Module.register("MMM-OrlandoWaitTimes", {
 
   processWaitTimes: function () {
     this.sendSocketNotification("GET_WAIT_TIMES", this.config.park);
-  }
+  },
 });

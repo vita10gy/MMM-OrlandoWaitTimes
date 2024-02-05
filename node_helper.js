@@ -1,7 +1,6 @@
 const NodeHelper = require("node_helper");
 const axios = require("axios");
 const { DateTime } = require("luxon");
-const parks = require("./parks.json");
 
 module.exports = NodeHelper.create({
   start: function () {
@@ -12,68 +11,60 @@ module.exports = NodeHelper.create({
     const sendError = (msg) => {
       console.log(`Error Processing Wait Times: ${msg}`);
       var payload = {
-        errorMessage: msg
+        errorMessage: msg,
       };
 
       this.sendSocketNotification(
-        `ERROR_${park.name.replace(/ /g, "_")}`,
+        `ERROR_${park.entity.replace(/ /g, "_")}`,
         payload
       );
     };
 
     const getPark = () => {
-      const selectedPark = parks.find((p) => p.name === park.name);
-      console.log(park,selectedPark,parks);
-      const selectedRides = park.rides.map((r) => {
-        return {
-          id: selectedPark.rides.find((r2) => r2.name === r)?.id || null,
-          name: r
-        };
-      });
-
       return {
-        ...selectedPark,
-        rides: selectedRides
+        entity: park.entity,
+        rides: park.rides,
       };
     };
 
     const processWaitTimes = async (selectedPark) => {
-      console.log(`${selectedPark.name}: Processing Wait Times...`);
+      console.log(`${selectedPark.entity}: Processing Wait Times...`);
       const waitTimes = await axios.get(
-        `https://api.themeparks.wiki/preview/parks/${selectedPark.id}/waittime`
+        `https://api.themeparks.wiki/v1/entity/${selectedPark.entity}/live`
       );
-      console.log(selectedPark);
+      //console.log(waitTimes.data.liveData);
       const results = [];
       for (const ride of selectedPark.rides) {
-        const waitTime = waitTimes.data.find(
-          (waitTime) => waitTime.id === ride.id
+        const waitTime = waitTimes.data.liveData.find(
+          (waitTime) => waitTime.id === ride
         );
         const result = {
-          name: ride.name,
+          name: waitTime.name,
           status: waitTime?.status || null,
-          waitTime: waitTime?.waitTime || null
+          waitTime: waitTime?.queue.STANDBY.waitTime || null,
         };
+        //  console.log(result);
         results.push(result);
       }
       results.sort((a, b) =>
         a.name.toLowerCase().localeCompare(b.name.toLowerCase())
       );
       const payload = { waitTimes: results };
-      console.log(`${selectedPark.name}: Processed Wait Times...`);
+      console.log(`${selectedPark.entity}: Processed Wait Times...`);
 
       this.sendSocketNotification(
-        `POPULATE_WAIT_TIMES_${selectedPark.name}`,
+        `POPULATE_WAIT_TIMES_${selectedPark.entity}`,
         payload
       );
     };
 
     const processOpeningTimes = async (selectedPark) => {
-      console.log(`${selectedPark.name}: Processing Opening Times...`);
+      console.log(`${selectedPark.entity}: Processing Opening Times...`);
       const openingTimes = await axios.get(
-        `https://api.themeparks.wiki/preview/parks/${selectedPark.id}/calendar`
+        `https://api.themeparks.wiki/v1/entity/${selectedPark.entity}/schedule`
       );
 
-      if (!openingTimes.data || !openingTimes.data.length) {
+      if (!openingTimes.data || !openingTimes.data.schedule.length) {
         return;
       }
 
@@ -81,30 +72,31 @@ module.exports = NodeHelper.create({
         .setZone(selectedPark.timezone)
         .startOf("day");
 
-      const todayOpeningTime = openingTimes.data.find((openingTime) =>
-        DateTime.fromISO(openingTime.date)
-          .setZone(selectedPark.timezone)
-          .startOf("day")
-          .equals(today)
+      const todayHours = openingTimes.data.schedule.find(
+        (looking) =>
+          looking.type === "OPERATING" &&
+          looking.date === today.toFormat("yyyy-MM-dd")
       );
 
-      const openingTime = DateTime.fromISO(todayOpeningTime.openingTime)
+      const openingTime = DateTime.fromISO(todayHours.openingTime)
         .setZone(selectedPark.timezone)
         .toFormat("hh:mm a");
-      const closingTime = DateTime.fromISO(todayOpeningTime.closingTime)
+      const closingTime = DateTime.fromISO(todayHours.closingTime)
         .setZone(selectedPark.timezone)
         .toFormat("hh:mm a");
 
       const payload = { openingTime, closingTime };
-      console.log(`${selectedPark.name}: Processed Opening Times...`);
+      console.log(payload);
+      console.log(`${selectedPark.entity}: Processed Opening Times...`);
 
       this.sendSocketNotification(
-        `POPULATE_OPENING_TIMES_${selectedPark.name}`,
+        `POPULATE_OPENING_TIMES_${selectedPark.entity}`,
         payload
       );
     };
 
     const selectedPark = getPark();
+    console.info(selectedPark);
     if (!selectedPark) {
       sendError("Selected park not found");
       return;
@@ -115,8 +107,9 @@ module.exports = NodeHelper.create({
   },
 
   socketNotificationReceived: function (notification, payload) {
+    //console.log(notification, "tesT", payload);
     if (notification === "GET_WAIT_TIMES") {
       this.getWaitTimes(payload);
     }
-  }
+  },
 });
