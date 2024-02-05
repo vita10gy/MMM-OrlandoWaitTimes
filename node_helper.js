@@ -23,7 +23,7 @@ module.exports = NodeHelper.create({
     const getPark = () => {
       return {
         entity: park.entity,
-        rides: park.rides,
+        rides: park.rides ?? [],
       };
     };
 
@@ -34,17 +34,26 @@ module.exports = NodeHelper.create({
       );
       //console.log(waitTimes.data.liveData);
       const results = [];
-      for (const ride of selectedPark.rides) {
-        const waitTime = waitTimes.data.liveData.find(
-          (waitTime) => waitTime.id === ride
-        );
-        const result = {
-          name: waitTime.name,
-          status: waitTime?.status || null,
-          waitTime: waitTime?.queue.STANDBY.waitTime || null,
-        };
-        //  console.log(result);
-        results.push(result);
+      for (const ride of waitTimes.data.liveData) {
+        let showRide = false;
+        if (
+          Array.isArray(selectedPark.rides) &&
+          selectedPark.rides.length > 0
+        ) {
+          //if rides are specified then limit to those
+          showRide = selectedPark.rides.includes(ride.id);
+        } else {
+          showRide = ride.entityType === "ATTRACTION" && "queue" in ride;
+        }
+        if (showRide) {
+          const result = {
+            name: ride.name,
+            status: ride?.status || null,
+            waitTime: ride?.queue?.STANDBY?.waitTime || null,
+          };
+          //  console.log(result);
+          results.push(result);
+        }
       }
       results.sort((a, b) =>
         a.name.toLowerCase().localeCompare(b.name.toLowerCase())
@@ -86,7 +95,7 @@ module.exports = NodeHelper.create({
         .toFormat("hh:mm a");
 
       const payload = { openingTime, closingTime };
-      console.log(payload);
+
       console.log(`${selectedPark.entity}: Processed Opening Times...`);
 
       this.sendSocketNotification(
