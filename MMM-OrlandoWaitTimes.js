@@ -69,8 +69,8 @@ Module.register("MMM-OrlandoWaitTimes", {
         var timeCell = document.createElement("td");
         timeCell.className = "bright title light time";
 
-        if (ride.status == "Closed") {
-          timeCell.innerHTML = "CLOSED";
+        if (ride.status == "CLOSED") {
+          timeCell.innerHTML = "Closed";
         } else if (ride.status == "DOWN") {
           timeCell.innerHTML = "down";
         } else if (ride.status == "REFURBISHMENT") {
