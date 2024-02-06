@@ -29,7 +29,6 @@ Module.register("MMM-ThemeParkWaitTimes", {
       hoursTable.className += "hours";
       var hoursRow = document.createElement("tr");
       hoursTable.appendChild(hoursRow);
-      console.log(this.futureHours);
       const d = new Date();
       for (var i = 0; i < 5; i++) {
         var hoursCell = document.createElement("td");
