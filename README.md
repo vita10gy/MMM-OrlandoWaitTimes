@@ -182,11 +182,11 @@ More resort/park examples can be found in the [examples directory](https://githu
 
 ## Entity Ids
 
-> Why so complex with the entity ids? Why can't I type "The Twilight Zone Tower of Terror™" or "Jungle Cruise"?
+> Why so complex with the entity ids? Why can't I type "The Twilight Zone Tower of Terror™" or "Jungle Cruise" in the rides array?
 
 Because the IDs don't change and don't require tiresome/fiddliy string matching. For example you don't need to worry about the ™ for Tower of Terror, and the Jungle Cruise doesn't disappear on you when they rename it to "Jingle Cruise" for a couple months.
 
-Doing it this way also takes this module out of the way of "direct" interaction with the Theme Park Wiki API. When they add a park or a ride no one has to wait on this project to add something to an internal mapping so I can make some slugs like "TowerOfTerror" instead of "6f6998e8-a629-412c-b964-2cb06af8e26b" to make it slightly more visually appealing to configure once.
+Doing it this way also takes this module out of the way of "direct" interaction with the Theme Park Wiki API. When they add a park or a ride no one has to wait on this project to add something to an internal mapping so I can make some slugs like "TowerOfTerror" instead of "6f6998e8-a629-412c-b964-2cb06af8e26b" to make it slightly more visually appealing to configure once. Ultimately there was no way around spelunking for what exact thing you had to list, so I figured you may as well go straight to the horse's mouth.
 
 ## MMM-DisneyWaitTimes Differences
 
