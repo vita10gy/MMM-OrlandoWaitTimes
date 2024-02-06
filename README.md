@@ -158,7 +158,6 @@ Here is an example for Magic Kingdom - Disney World configuration in `config.js`
         "8183f3f2-1b59-4b9c-b634-6a863bdf8d84", //walt disney's carousel of progress
         "273ddb8d-e7b5-4e34-8657-1113f49262a5", //prince charming regal carrousel
         "ffcfeaa2-1416-4920-a1ed-543c1a1695c4", //tomorrowland transit authority peoplemover
-        "de737ffc-306b-4f32-8bbb-34e5d370ec8f", //a pirate's adventure ~ treasures of the seven seas
         "30fe3c64-af71-4c66-a54b-aa61fd7af177", //swiss family treehouse
         "72c7343a-f7fb-4f66-95df-c91016de7338", //buzz lightyear's space ranger spin
         "e40ac396-cbac-43f4-8752-764ed60ccceb", //walt disney world railroad - fantasyland
@@ -180,3 +179,19 @@ Here is an example for Magic Kingdom - Disney World configuration in `config.js`
 ```
 
 More resort/park examples can be found in the [examples directory](https://github.com/vita10gy/MMM-ThemeParkWaitTimes/tree/master/examples).
+
+## Entity Ids
+
+> Why so complex with the entity ids? Why can't I type "The Twilight Zone Tower of Terror™" or "Jungle Cruise"?
+
+Because the IDs don't change and don't require tiresome/fiddliy string matching. For example you don't need to worry about the ™ for Tower of Terror, and the Jungle Cruise doesn't disappear on you when they rename it to "Jingle Cruise" for a couple months.
+
+Doing it this way also takes this module out of the way of "direct" interaction with the Theme Park Wiki API. When they add a park or a ride no one has to wait on this project to add something to an internal mapping so I can make some slugs like "TowerOfTerror" instead of "6f6998e8-a629-412c-b964-2cb06af8e26b" to make it slightly more visually appealing to configure once.
+
+## MMM-DisneyWaitTimes Differences
+
+Huge Thanks to @gberg927 for his work on the original https://github.com/gberg927/MMM-DisneyWaitTimes project this heavily piggybacked off of.
+
+Usage differences: This project is no longer restricted to just a few of the Disney parks. It also shows the hours for the upcoming 5 days.
+
+Technical differences: This project uses the newer version of the Theme Park Wiki API and should provide more accurate data.
