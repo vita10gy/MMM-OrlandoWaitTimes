@@ -111,15 +111,18 @@ npm install
 
 ## Config
 
-| **Option**    | **Description**                                                 |
-| ------------- | --------------------------------------------------------------- |
-| `park`        | The park that the wait times will be retrieved for.             |
-| `futureHours` | boolean - the module will show hours for the next 5 days or not |
+| **Option**       | **Requirement/Type**                 | **Description**                                        |
+| ---------------- | ------------------------------------ | ------------------------------------------------------ |
+| `park`           | Required - Described below.          | The park that the wait times will be retrieved for.    |
+| `futureHours`    | boolean - Optional - Default: true   | The module will show hours for the next 5 days or not  |
+| `updateInterval` | int - Optional - Default: 10 minutes | the time between checking for updates, in milleseconds |
 
-| Option   | Description                                                                                                                                                                                                                                                                                                                                                                    |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `entity` | The entity id of the Park that will be used to retrieve wait times. These can be located here: https://themeparks.wiki/browse/ either via the URL or the links provided. For example Disney's Magic Kingdom's URL is https://themeparks.wiki/browse/75ea578a-adc8-4116-a54d-dccb60765ef9 and 75ea578a-adc8-4116-a54d-dccb60765ef9 is the entity id you put in the config file. |
-| `rides`  | An optional array of the rides you would like to display the wait times for. If no array is provided a list of all things that are tagged ATTRACTION and have a queue are listed. Rides should be listed by their id, found at URLs such as https://api.themeparks.wiki/v1/entity/75ea578a-adc8-4116-a54d-dccb60765ef9/live (note the url is using the entity you used above.) |
+### The "park" element
+
+| **Option** | **Requirement/Type** | **Description**                                                                                                                                                                                                                                                                                                                                                                |
+| ---------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `entity`   | Required/String      | The entity id of the Park that will be used to retrieve wait times. These can be located here: https://themeparks.wiki/browse/ either via the URL or the links provided. For example Disney's Magic Kingdom's URL is https://themeparks.wiki/browse/75ea578a-adc8-4116-a54d-dccb60765ef9 and 75ea578a-adc8-4116-a54d-dccb60765ef9 is the entity id you put in the config file. |
+| `rides`    | Optional/Array       | An optional array of the rides you would like to display the wait times for. Rides should be listed by their id, found at URLs such as https://api.themeparks.wiki/v1/entity/75ea578a-adc8-4116-a54d-dccb60765ef9/live (note the url is using the entity you used above.) If no array is provided a list of all things that are tagged ATTRACTION and have a queue are listed. |
 
 Here is an example for Magic Kingdom - Disney World configuration in `config.js`
 
