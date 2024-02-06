@@ -1,6 +1,6 @@
 const exampleModule = {
   module: "MMM-ThemeParkWaitTimes",
-  header: "Hollywood Studios", //You can call this whatever
+  header: "Universal Studios", //You can call this whatever
   position: "top_left",
   config: {
     futureHours: false, //allows you to hide the hours for upcoming days
