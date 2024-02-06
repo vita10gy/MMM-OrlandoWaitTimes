@@ -1,6 +1,7 @@
 Module.register("MMM-ThemeParkWaitTimes", {
   defaults: {
     updateInterval: 10 * 60 * 1000,
+    futureHours: true,
   },
 
   getScripts: function () {
@@ -15,14 +16,29 @@ Module.register("MMM-ThemeParkWaitTimes", {
     var headerDiv = document.createElement("div");
     headerDiv.innerHTML = this.data.header;
 
-    var timeSpan = document.createElement("span");
+    var timeSpan = document.createElement("div");
     timeSpan.className = "parkTime";
 
     if (this.openingTime != null && this.closingTime != null) {
       timeSpan.innerHTML = " " + this.openingTime + " - " + this.closingTime;
     }
-
     headerDiv.appendChild(timeSpan);
+
+    if (this.futureHours != null && this.config.futureHours) {
+      var hoursTable = document.createElement("table");
+      hoursTable.className += "hours";
+      var hoursRow = document.createElement("tr");
+      hoursTable.appendChild(hoursRow);
+      console.log(this.futureHours);
+      const d = new Date();
+      for (var i = 0; i < 5; i++) {
+        var hoursCell = document.createElement("td");
+        hoursCell.className += "day" + ((d.getDay() + i + 1) % 7);
+        hoursRow.appendChild(hoursCell);
+        hoursCell.innerHTML = this.futureHours[i];
+      }
+      headerDiv.appendChild(hoursTable);
+    }
 
     return headerDiv.innerHTML;
   },
@@ -35,6 +51,7 @@ Module.register("MMM-ThemeParkWaitTimes", {
     this.rides = [];
     this.openingTime;
     this.closingTime;
+    this.futureHours;
     this.errorMessage;
 
     setInterval(function () {
@@ -46,6 +63,7 @@ Module.register("MMM-ThemeParkWaitTimes", {
   getDom: function () {
     var table = document.createElement("table");
     table.className = "small";
+
     if (this.errorMessage) {
       var row = document.createElement("tr");
       row.className += "row";
@@ -96,6 +114,7 @@ Module.register("MMM-ThemeParkWaitTimes", {
     ) {
       this.openingTime = payload.openingTime;
       this.closingTime = payload.closingTime;
+      this.futureHours = payload.futureHours;
       this.updateDom();
     } else if (notification === "ERROR_" + this.config.park.entity) {
       this.errorMessage = payload.errorMessage;

@@ -16,3 +16,33 @@
   color: red;
   text-transform: uppercase;
 }
+
+.module-header {
+  text-align: left;
+}
+
+td.bright.title {
+  text-align: left;
+}
+td.bright.title.time {
+  text-align: right;
+}
+
+table.hours {
+  margin-top: 5px;
+}
+
+table.hours td {
+  font-size: 0.8em;
+  padding: 0 4px;
+  text-align: center;
+}
+
+table.hours td + td {
+  border-left: 1px solid #333;
+}
+
+table.hours td.day6,
+table.hours td.day0 {
+  color: #f5f5f5;
+}

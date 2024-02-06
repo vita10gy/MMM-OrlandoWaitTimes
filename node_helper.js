@@ -44,9 +44,6 @@ module.exports = NodeHelper.create({
           showRide = selectedPark.rides.includes(ride.id);
         } else {
           showRide = ride.entityType === "ATTRACTION" && "queue" in ride;
-          if (showRide) {
-            console.log(`"${ride.id}", //${ride.name}`);
-          }
         }
         if (showRide) {
           const result = {
@@ -62,7 +59,7 @@ module.exports = NodeHelper.create({
         a.name.toLowerCase().localeCompare(b.name.toLowerCase())
       );
       const payload = { waitTimes: results };
-      console.log(`${selectedPark.entity}: Processed Wait Times...`);
+      console.log(`${waitTimes.data.name}: Processed Wait Times...`);
 
       this.sendSocketNotification(
         `POPULATE_WAIT_TIMES_${selectedPark.entity}`,
@@ -90,13 +87,31 @@ module.exports = NodeHelper.create({
           looking.date === today.toFormat("yyyy-MM-dd")
       );
 
-      const futureHours = openingTimes.data.schedule.filter(
-        (looking) =>
-          looking.type === "OPERATING" &&
-          looking.date !== today.toFormat("yyyy-MM-dd")
-      );
-
-      console.log(futureHours);
+      const futureHours = openingTimes.data.schedule
+        .filter(
+          (looking) =>
+            looking.type === "OPERATING" &&
+            looking.date !== today.toFormat("yyyy-MM-dd")
+        )
+        .map((day) => {
+          return (
+            DateTime.fromISO(day.openingTime).toLocaleString({
+              month: "numeric",
+              day: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+            }) +
+            "-" +
+            DateTime.fromISO(day.closingTime).toLocaleString({
+              hour: "numeric",
+              minute: "2-digit",
+            })
+          )
+            .replaceAll(":00", "")
+            .replace(", ", " ")
+            .replaceAll(" AM", "AM")
+            .replaceAll(" PM", "PM");
+        });
 
       const openingTime = DateTime.fromISO(todayHours.openingTime)
         .setZone(selectedPark.timezone)
@@ -105,9 +120,9 @@ module.exports = NodeHelper.create({
         .setZone(selectedPark.timezone)
         .toFormat("hh:mm a");
 
-      const payload = { openingTime, closingTime };
+      const payload = { openingTime, closingTime, futureHours };
 
-      console.log(`${selectedPark.entity}: Processed Opening Times...`);
+      console.log(`${openingTimes.data.name}: Processed Opening Times...`);
 
       this.sendSocketNotification(
         `POPULATE_OPENING_TIMES_${selectedPark.entity}`,
