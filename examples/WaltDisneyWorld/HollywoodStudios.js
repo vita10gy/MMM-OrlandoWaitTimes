@@ -3,6 +3,7 @@ const exampleModule = {
   header: "Hollywood Studios", //You can call this whatever
   position: "top_left",
   config: {
+    futureHours: false, //allows you to hide the hours for upcoming days
     park: {
       entity: "288747d1-8b4f-4a64-867e-ea7c9b27bad8", //https://themeparks.wiki/browse/
       rides: [
