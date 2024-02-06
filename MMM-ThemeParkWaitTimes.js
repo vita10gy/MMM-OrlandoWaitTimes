@@ -87,7 +87,7 @@ Module.register("MMM-ThemeParkWaitTimes", {
         timeCell.className = "bright title light time";
 
         if (ride.status == "CLOSED") {
-          timeCell.innerHTML = "Closed";
+          timeCell.innerHTML = "closed";
         } else if (ride.status == "DOWN") {
           timeCell.innerHTML = "down";
         } else if (ride.status == "REFURBISHMENT") {
