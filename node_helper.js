@@ -90,6 +90,14 @@ module.exports = NodeHelper.create({
           looking.date === today.toFormat("yyyy-MM-dd")
       );
 
+      const futureHours = openingTimes.data.schedule.filter(
+        (looking) =>
+          looking.type === "OPERATING" &&
+          looking.date !== today.toFormat("yyyy-MM-dd")
+      );
+
+      console.log(futureHours);
+
       const openingTime = DateTime.fromISO(todayHours.openingTime)
         .setZone(selectedPark.timezone)
         .toFormat("hh:mm a");

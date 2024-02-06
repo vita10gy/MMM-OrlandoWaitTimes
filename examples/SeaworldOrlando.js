@@ -1,5 +1,5 @@
 const exampleModule = {
-  module: "MMM-OrlandoWaitTimes",
+  module: "MMM-ThemeParkWaitTimes",
   header: "Seaworld - Orlando", //You can call this whatever
   position: "top_left",
   config: {

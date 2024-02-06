@@ -1,8 +1,8 @@
-# MMM-DisneyWaitTimes
+# MMM-ThemeParkWaitTimes
 
 Disney World Wait Times for Magic Mirror
 
-![alt text](https://github.com/gberg927/MMM-DisneyWaitTimes/blob/master/wait-times-demo.png)
+![alt text](https://github.com/vita10gy/MMM-ThemeParkWaitTimes/blob/master/wait-times-demo.png)
 
 ## Dependencies
 
@@ -11,12 +11,12 @@ Disney World Wait Times for Magic Mirror
 
 ## Installation
 
-1. Install MMM-DisneyWaitTimes Module
+1. Install MMM-ThemeParkWaitTimes Module
 
 ```javascript
 cd ~MagicMirror/modules/
-git clone git@github.com:gberg927/MMM-DisneyWaitTimes.git
-cd MMM-DisneyWaitTimes
+git clone git@github.com:vita10gy/MMM-ThemeParkWaitTimes.git
+cd MMM-ThemeParkWaitTimes
 npm install
 ```
 
@@ -24,20 +24,20 @@ npm install
 
 ## Config
 
-| **Option** | **Description**                                              |
-| ---------- | ------------------------------------------------------------ |
+| **Option** | **Description**                                     |
+| ---------- | --------------------------------------------------- |
 | `park`     | The park that the wait times will be retrieved for. |
 
-| Option    | Description                                                                                                                     |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `name`    | The name of the Park that will be used to retrieve wait times.                                                                  |
-| `ride`    | An array of the rides you would like to display the wait times for. This is a string representation of the ride name.           |
+| Option | Description                                                                                                           |
+| ------ | --------------------------------------------------------------------------------------------------------------------- |
+| `name` | The name of the Park that will be used to retrieve wait times.                                                        |
+| `ride` | An array of the rides you would like to display the wait times for. This is a string representation of the ride name. |
 
 Here is an example for Magic Kingdom - Disney World configuration in `config.js`
 
 ```
   {
-    module: "MMM-DisneyWaitTimes",
+    module: "MMM-ThemeParkWaitTimes",
     header: "Magic Kingdom - Walt Disney World",
     position: "top_left",
     config: {
@@ -89,4 +89,5 @@ Here is an example for Magic Kingdom - Disney World configuration in `config.js`
     }
   }
 ```
-More resort/park examples can be found in the [examples directory](https://github.com/gberg927/MMM-DisneyWaitTimes/tree/master/examples).
+
+More resort/park examples can be found in the [examples directory](https://github.com/vita10gy/MMM-ThemeParkWaitTimes/tree/master/examples).

@@ -1,4 +1,4 @@
-Module.register("MMM-OrlandoWaitTimes", {
+Module.register("MMM-ThemeParkWaitTimes", {
   defaults: {
     updateInterval: 10 * 60 * 1000,
   },
@@ -8,7 +8,7 @@ Module.register("MMM-OrlandoWaitTimes", {
   },
 
   getStyles: function () {
-    return ["disney.css"];
+    return ["style.css"];
   },
 
   getHeader: function () {
