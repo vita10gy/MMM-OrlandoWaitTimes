@@ -27,7 +27,6 @@ const exampleModule = {
         "8183f3f2-1b59-4b9c-b634-6a863bdf8d84", //walt disney's carousel of progress
         "273ddb8d-e7b5-4e34-8657-1113f49262a5", //prince charming regal carrousel
         "ffcfeaa2-1416-4920-a1ed-543c1a1695c4", //tomorrowland transit authority peoplemover
-        "de737ffc-306b-4f32-8bbb-34e5d370ec8f", //a pirate's adventure ~ treasures of the seven seas
         "30fe3c64-af71-4c66-a54b-aa61fd7af177", //swiss family treehouse
         "72c7343a-f7fb-4f66-95df-c91016de7338", //buzz lightyear's space ranger spin
         "e40ac396-cbac-43f4-8752-764ed60ccceb", //walt disney world railroad - fantasyland
